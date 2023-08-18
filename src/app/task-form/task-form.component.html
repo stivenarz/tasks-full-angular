@@ -1,0 +1,87 @@
+<div id='modalTask'>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="taskController.create()"
+  >
+    Add new Task
+  </button>
+
+  <!-- Modal -->
+  <div *ngIf="taskController.modal" class="modalTask">
+    <div class="modalTask-content bgc col-sm-10 col-md-8 col-lg-4">
+      <div class="container">
+        <div class="modalTask-header">
+          <h1 class="modal-title fs-5">{{ taskController.action }} Task</h1>
+        </div>
+
+        <form class="" (submit)="taskController.routerForm()">
+          <div class="modalTask-body">
+            <div class="row">
+              <label for="title" class="col-md-4 col-form-label text-md-end"
+                >Title:</label
+              >
+              <div class="col-md-8">
+                <input
+                  class="col-12 {{
+                    taskController.invalidForm.title ? 'invalid' : ''
+                  }} "
+                  type="text"
+                  id="title"
+                  name="title"
+                  [(ngModel)]="taskController.model.title"
+                  placeholder="Enter new title"
+                  autocomplete="title"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <label
+                for="description"
+                class="col-md-4 col-form-label text-md-end"
+                >Description:</label
+              >
+              <div class="col-md-8">
+                <textarea
+                  class="col-12 {{
+                    taskController.invalidForm.description ? 'invalid' : ''
+                  }} "
+                  type="text"
+                  id="description"
+                  name="description"
+                  [(ngModel)]="taskController.model.description"
+                  placeholder="Enter new description"
+                  autocomplete="description"
+                  required
+                >
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="modalTask-footer">
+            <div class="m-1 d-flex align-items-center">
+              <Alert [alert]="taskController.alert" />
+            </div>
+
+            <div class="p-1">
+              <button type="submit" class="m-1 btn btn-success btn-sm">
+                {{ taskController.action }}
+              </button>
+              <button
+                type="button"
+                class="m-1 btn btn-secondary btn-sm"
+                (click)="taskController.openModal()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+// body{
+//     background: #02AAB0;
+//     background: -webkit-linear-gradient(left, #00CDAC, #02AAB0);
+//     background: -moz-linear-gradient(left, #00CDAC, #02AAB0);
+//     background: -o-linear-gradient(left, #00CDAC, #02AAB0);
+//     background: linear-gradient(ritgh, #00CDAC, #02AAB0);
+//     }
+
+// Colores para el aspecto del sistema
+$bg-dark: #333333;
+$bg-light: #ffffff;
+$text-dark: #333333;
+$line-light: #ffffff;
+$line-dark: #333333;
+$text-light: #ffffff;
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 10px;
+    overflow: auto;
+    background-color: $bg-light;
+    color: $text-dark;
+}
+input {
+    padding: 2px;
+}
+.bgc{
+    background-color: white;
+    color: $text-dark;
+    border: solid 2px #333333;
+  }
+  
+  .modalTask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #8884849e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modalTask-content{
+    border-radius: 10px;
+    margin-top: 5%;
+    padding: 10px;
+}
+.modalTask-header{
+    border-bottom: solid 1px #333333;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+.modalTask-body{
+    padding: 10px;
+}
+.modalTask-footer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-top: solid 1px #333333;
+    border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+      background-color: $bg-dark;
+      color: $text-light;
+    }
+    input, textarea {
+        color: #ffffff;
+        background-color: #747171;
+    }
+    .bgc {
+        background-color: #333333;
+        color: $text-light;
+        border: solid 2px #ffffff;
+    }
+    .modalTask-header {
+        border-bottom: solid 1px #ffffff;
+    }
+    .modalTask-footer {
+        border-top: solid 1px #ffffff;
+    }
+}

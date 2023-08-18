@@ -1,0 +1,41 @@
+.cardTask{
+    // display: flex;
+    // justify-content: center;
+}
+.cardTaskContent{
+    width: 100%;
+    border: solid 1px gray;
+    border-radius: 10px;
+    padding: 2px 0px;
+    margin: 2px;   
+}
+
+.cardTaskHeader{
+    border-bottom: solid 1px #333333;
+    margin: 0px 20px 20px 20px;
+    border-radius: 10px;
+    padding: 0px 10px;
+
+}
+.cardTaskBody{
+    margin: 5px 30px;
+    padding: 5px;
+}
+.cardTaskFooter{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    border-top: solid 1px #333333;
+    border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cardTaskHeader {
+        border-bottom: solid 1px #ffffff;
+    }
+    .cardTaskFooter {
+        border-top: solid 1px #ffffff;
+    }
+}
+
+  

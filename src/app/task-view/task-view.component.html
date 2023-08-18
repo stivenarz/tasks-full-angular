@@ -1,0 +1,22 @@
+<div class="cardTask">
+  <div class="cardTaskContent">
+    <div class="cardTaskHeader text-truncate">
+      <h2>{{ task.title }}</h2>
+    </div>
+  
+    <div class="cardTaskBody">
+      <p class="text-secondary">{{ task.description }}</p>
+    </div>
+  
+    <div class="cardTaskFooter">
+      <div class="p-1">
+        <p class="m-1"> {{ task.done ? 'Done' : 'No finished'}} </p>
+      </div>
+      <div class="p-1">
+        <button class="m-1 btn {{ task.done ? 'btn-secondary' : 'btn-primary'}} btn-sm" (click)="taskController.done(task)"> {{ task.done ? 'Undone' : 'Done' }} </button>
+        <button class="m-1 btn btn-info btn-sm" (click)="taskController.edit(task)">Edit</button>
+        <button class="m-1 btn btn-danger btn-sm" (click)="taskController.delete(task)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
