@@ -8,7 +8,7 @@
     </div>
 
     <div class="m-1 container" *ngFor="let task of tasks; let index of tasks">
-      <div @enterState [@exitState]=" animationKey !== task.id ? 'visible' : 'hidden'">
+      <div @enterState [@exitState]=" animationKey !== task._id ? 'visible' : 'hidden'">
         <TaskView [task]="this.task" />
       </div>
     </div>

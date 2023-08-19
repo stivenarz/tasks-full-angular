@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { tasks } from '../../database';
+import { TasksConectionService } from '../tasks-conection.service'
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -38,17 +39,21 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 export class Tasks {
 
-  constructor() {
+  constructor(private TasksConection: TasksConectionService) {
 
   }
 
   ngOnInit(): void {
-
+    this.TasksConection.index().subscribe(
+      (data) => {
+        this.tasks = data
+      }
+    )
   }
 
   // VARS DECLARATION ----------------------------------------------------------------------------------------------------------------------------------------
 
-  tasks: any = tasks;
+  tasks: any = [];
   task: any = {};
   alert: any = {};
   model: any = {
@@ -72,36 +77,44 @@ export class Tasks {
   }
 
   public save(): void {
-    if (!this.validate()) {
-      this.setAlert({
-        status: 'error',
-        msg: 'Fill in all fields'
-      });
-    } else {
-      this.model.id = this.tasks.length + 1;
-      this.tasks.push(this.model);
+    if (this.validate()) {
+      this.TasksConection.save(this.model).subscribe(
+        (data)=>{
+          console.log('task save', data)
+          this.tasks.push(data)
+        }
+      )
+      // this.model.id = this.tasks.length + 1;
+      // this.tasks.push(this.model);
       this.resetModel();
       this.setAlert({
         status: 'success',
         msg: 'Task saved successfully'
       });
       document.getElementById('title')?.focus()
+    } else {
+      this.setAlert({
+        status: 'error',
+        msg: 'Fill in all fields'
+      });
     }
   }
 
   public edit(task: any = {}) {
     this.action = 'Update';
-    this.model.id = task.id;
-    this.model.title = task.title;
-    this.model.description = task.description;
+    this.model = {...task};
     this.resetAlert();
     this.openModal(true);
   }
 
   public update(task: any = {}) {
-    const taskModified = this.model;
+    var taskModified = {...this.model};
     if (this.validate()) {
-      this.tasks = this.tasks.map(change);
+      this.TasksConection.update(taskModified).subscribe(
+        (data)=>{
+          this.tasks = this.tasks.map(change);
+        }
+      )
       this.setAlert({
         status: 'success',
         msg: 'Task updated successfully'
@@ -114,19 +127,21 @@ export class Tasks {
     }
 
     function change(item: any) {
-      if (item.id != taskModified.id) {
+      if (item._id != taskModified._id) {
         return item
       } else {
-        item.title  = taskModified.title;
-        item.description  = taskModified.description;
-        return item
+        return taskModified
       }
     }
   }
 
   public delete(task: any = {}) {
     if (confirm(`Sure delete task: ${task.title}?`)) {
-      this.animationKey = task.id
+      this.TasksConection.delete(task).subscribe(
+        (data)=>{
+          this.animationKey = data._id
+        }
+      )
       setTimeout(() => {
         this.tasks = this.tasks.filter(kill)
         this.animationKey = null
@@ -137,7 +152,7 @@ export class Tasks {
       });
 
       function kill(item: any) {
-        if (item.id != task.id) {
+        if (item._id != task._id) {
           return item
         }
       }
@@ -146,10 +161,14 @@ export class Tasks {
   }
 
   public done(task: any) {
-    this.tasks = this.tasks.map(changue)
+    this.TasksConection.toggleDone(task).subscribe(
+      (data)=>{
+        this.tasks = this.tasks.map(change);
+      }
+    )
 
-    function changue(item: any) {
-      if (task.id === item.id) {
+    function change(item: any) {
+      if (task._id === item._id) {
         item.done = !item.done
       }
       return item
@@ -176,7 +195,7 @@ export class Tasks {
         modalTitle.focus()
         clearInterval(focusTitle)
       }
-    },5);
+    }, 5);
   }
 
   public routerForm() {
