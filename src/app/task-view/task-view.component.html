@@ -13,7 +13,7 @@
         <p class="m-1"> {{ task.done ? 'Done' : 'No finished'}} </p>
       </div>
       <div class="p-1">
-        <button class="m-1 btn {{ task.done ? 'btn-secondary' : 'btn-primary'}} btn-sm" (click)="taskController.done(task)"> {{ task.done ? 'Undone' : 'Done' }} </button>
+        <button class="m-1 btn {{ task.done ? 'btn-secondary' : 'btn-primary'}} btn-sm" (click)="taskController.toggleDone(task)"> {{ task.done ? 'Undone' : 'Done' }} </button>
         <button class="m-1 btn btn-info btn-sm" (click)="taskController.edit(task)">Edit</button>
         <button class="m-1 btn btn-danger btn-sm" (click)="taskController.delete(task)">Delete</button>
       </div>

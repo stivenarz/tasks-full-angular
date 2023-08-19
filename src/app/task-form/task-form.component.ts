@@ -11,7 +11,7 @@ export class TaskForm implements AfterViewInit {
 
   constructor(private sharedService: SharedService, public taskController: Tasks, public elementRef: ElementRef) {
    this.sharedService.valueChanged$.subscribe(newValue => {
-      this.taskController.model = newValue;
+      this.taskController.task = newValue;
       this.taskController.openModal();
     });
 

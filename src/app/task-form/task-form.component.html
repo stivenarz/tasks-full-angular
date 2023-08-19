@@ -16,7 +16,7 @@
           <h1 class="modal-title fs-5">{{ taskController.action }} Task</h1>
         </div>
 
-        <form class="" (submit)="taskController.routerForm()">
+        <form class="" (submit)="taskController.routerForm(taskController.task)">
           <div class="modalTask-body">
             <div class="row">
               <label for="title" class="col-md-4 col-form-label text-md-end"
@@ -30,7 +30,7 @@
                   type="text"
                   id="title"
                   name="title"
-                  [(ngModel)]="taskController.model.title"
+                  [(ngModel)]="taskController.task.title"
                   placeholder="Enter new title"
                   autocomplete="title"
                   required
@@ -52,7 +52,7 @@
                   type="text"
                   id="description"
                   name="description"
-                  [(ngModel)]="taskController.model.description"
+                  [(ngModel)]="taskController.task.description"
                   placeholder="Enter new description"
                   autocomplete="description"
                   required
